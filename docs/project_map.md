@@ -1,0 +1,48 @@
+# Project Folder Structure (خريطة المشروع)
+
+This document describes the main folders and files in this Laravel project and their purposes.
+
+---
+
+## Root Files
+- **artisan**: Laravel CLI tool for running commands.
+- **composer.json / composer.lock**: PHP dependencies and versions.
+- **package.json**: Node.js dependencies for frontend assets.
+- **phpunit.xml**: PHPUnit configuration for testing.
+- **README.md**: Project overview and instructions.
+- **vite.config.js**: Vite configuration for asset bundling.
+
+## Main Folders
+- **app/**: Application core code (controllers, models, providers).
+  - **Http/Controllers/**: Handles HTTP requests and responses.
+  - **Models/**: Eloquent models representing database tables.
+  - **Providers/**: Service providers for bootstrapping services.
+- **bootstrap/**: Bootstraps the framework and loads configuration.
+- **config/**: Application configuration files (auth, database, cache, etc).
+- **database/**: Database migrations, seeders, and factories.
+  - **migrations/**: Database schema definitions.
+  - **seeders/**: Classes for populating the database with data.
+  - **factories/**: Factories for generating test data.
+- **public/**: Web server root. Contains `index.php` and public assets.
+- **resources/**: Views, raw assets (CSS, JS), and language files.
+  - **views/**: Blade templates for HTML rendering.
+  - **css/**, **js/**: Frontend assets.
+- **routes/**: Route definitions for web and console (CLI) requests.
+- **storage/**: Compiled views, logs, cache, and user files.
+- **tests/**: Unit and feature tests.
+- **vendor/**: Composer-managed PHP dependencies (auto-generated).
+
+---
+
+## بالعربي
+
+- **app/**: كود التطبيق الأساسي (التحكم، النماذج، المزودات).
+- **bootstrap/**: تهيئة الإطار وتحميل الإعدادات.
+- **config/**: ملفات إعدادات التطبيق.
+- **database/**: الهجرات، تعبئة البيانات، المصانع.
+- **public/**: جذر السيرفر وملفات عامة.
+- **resources/**: القوالب والملفات الأمامية.
+- **routes/**: تعريف المسارات.
+- **storage/**: ملفات مؤقتة، سجلات، ملفات المستخدمين.
+- **tests/**: اختبارات التطبيق.
+- **vendor/**: مكتبات PHP الخارجية.
