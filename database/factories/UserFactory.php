@@ -1,4 +1,10 @@
 <?php
+/**
+ * User Factory
+ *
+ * English: Defines the default set of attributes for creating user model instances in tests and seeding.
+ * Arabic: يحدد مجموعة الخصائص الافتراضية لإنشاء مثيلات نموذج المستخدم في الاختبارات والتعبئة.
+ */
 
 namespace Database\Factories;
 

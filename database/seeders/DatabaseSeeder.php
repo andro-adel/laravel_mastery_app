@@ -1,4 +1,10 @@
 <?php
+/**
+ * Database Seeder
+ *
+ * English: Seeds the application's database with initial data. Used for populating tables with sample or default data.
+ * Arabic: يعبئ قاعدة بيانات التطبيق ببيانات أولية. يُستخدم لملء الجداول ببيانات تجريبية أو افتراضية.
+ */
 
 namespace Database\Seeders;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Authentication Configuration
+ *
+ * English: Contains authentication settings for guards, providers, and password resets in the Laravel application.
+ * Arabic: يحتوي على إعدادات المصادقة للحراس والمزودين وإعادة تعيين كلمات المرور في تطبيق لارافيل.
+ */
 
 return [
 

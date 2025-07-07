@@ -1,4 +1,10 @@
 <?php
+/**
+ * Database Configuration
+ *
+ * English: Contains database connection settings and options for the Laravel application.
+ * Arabic: يحتوي على إعدادات اتصال قاعدة البيانات وخياراتها لتطبيق لارافيل.
+ */
 
 use Illuminate\Support\Str;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Logging Configuration
+ *
+ * English: Contains logging channel and handler settings for the Laravel application.
+ * Arabic: يحتوي على إعدادات قنوات ومسجلات السجلات لتطبيق لارافيل.
+ */
 
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;

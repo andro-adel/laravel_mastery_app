@@ -1,4 +1,10 @@
 <?php
+/**
+ * Services Configuration
+ *
+ * English: Contains credentials and settings for third-party services used by the Laravel application.
+ * Arabic: يحتوي على بيانات الاعتماد والإعدادات للخدمات الخارجية المستخدمة في تطبيق لارافيل.
+ */
 
 return [
 

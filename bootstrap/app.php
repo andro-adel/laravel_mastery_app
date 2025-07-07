@@ -1,4 +1,10 @@
 <?php
+/**
+ * Bootstrap Application
+ *
+ * English: Creates the application instance and binds important interfaces. This file is the entry point for bootstrapping the Laravel framework.
+ * Arabic: ينشئ مثيل التطبيق ويربط الواجهات الهامة. هذا الملف هو نقطة البداية لتهيئة إطار عمل لارافيل.
+ */
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;

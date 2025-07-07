@@ -1,4 +1,10 @@
 <?php
+/**
+ * Queue Configuration
+ *
+ * English: Contains queue connection and job processing settings for the Laravel application.
+ * Arabic: يحتوي على إعدادات الاتصال بالطوابير ومعالجة الوظائف لتطبيق لارافيل.
+ */
 
 return [
 

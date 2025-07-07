@@ -1,4 +1,10 @@
 <?php
+/**
+ * Cache Configuration
+ *
+ * English: Contains cache store and driver settings for the Laravel application.
+ * Arabic: يحتوي على إعدادات التخزين المؤقت ومحركات التخزين لتطبيق لارافيل.
+ */
 
 use Illuminate\Support\Str;
 

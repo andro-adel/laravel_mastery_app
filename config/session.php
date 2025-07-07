@@ -1,4 +1,10 @@
 <?php
+/**
+ * Session Configuration
+ *
+ * English: Contains session driver and storage settings for the Laravel application.
+ * Arabic: يحتوي على إعدادات محرك الجلسات وتخزينها لتطبيق لارافيل.
+ */
 
 use Illuminate\Support\Str;
 

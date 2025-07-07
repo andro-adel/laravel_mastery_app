@@ -1,4 +1,10 @@
 <?php
+/**
+ * User Model
+ *
+ * English: Represents the user entity in the application. Handles user authentication, relationships, and attributes.
+ * Arabic: يمثل كيان المستخدم في التطبيق. يتعامل مع المصادقة والعلاقات والخصائص الخاصة بالمستخدم.
+ */
 
 namespace App\Models;
 

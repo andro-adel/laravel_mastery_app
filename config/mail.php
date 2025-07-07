@@ -1,4 +1,10 @@
 <?php
+/**
+ * Mail Configuration
+ *
+ * English: Contains mailer and email sending settings for the Laravel application.
+ * Arabic: يحتوي على إعدادات المراسلة وإرسال البريد الإلكتروني لتطبيق لارافيل.
+ */
 
 return [
 
