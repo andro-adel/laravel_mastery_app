@@ -34,6 +34,28 @@ php artisan livewire:publish --assets
 php artisan make:livewire Courses/ExampleComponent
 ```
 
+## 6. إنشاء مكونات Livewire Volt لإدارة الدورات (CRUD)
+```
+php artisan make:livewire courses.index --volt
+php artisan make:livewire courses.create --volt
+php artisan make:livewire courses.edit --volt
+php artisan make:livewire courses.show --volt
+```
+- هذه الأوامر تنشئ مكونات Livewire Volt لعرض، إضافة، تعديل، وعرض تفاصيل الدورات.
+
+## 7. إنشاء Policy للتحكم في صلاحيات الدورات
+```
+php artisan make:policy CoursePolicy --model=Course
+```
+- هذا الأمر ينشئ Policy للتحكم في من يمكنه إدارة الدورات (مدير، مدرس، طالب).
+
+## 8. إنشاء Form Request للتحقق من صحة البيانات
+```
+php artisan make:request StoreCourseRequest
+php artisan make:request UpdateCourseRequest
+```
+- هذه الأوامر تنشئ كلاس مخصص للتحقق من صحة البيانات عند إضافة أو تعديل دورة.
+
 ## 7. إنشاء ملفات الهجرة (Migrations) للدورات والصلاحيات
 ```
 php artisan make:migration create_courses_table

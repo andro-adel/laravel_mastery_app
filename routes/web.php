@@ -20,4 +20,18 @@ Route::middleware(['auth', 'role:admin'])
         return view('admin.dashboard');
     });
 
+// Course CRUD routes | مسارات إدارة الدورات
+use Livewire\Volt\Volt;
+
+Route::middleware(['auth'])->group(function () {
+    // List all courses | عرض جميع الدورات
+    Volt::route('courses', 'courses.index')->name('courses.index');
+    // Create a new course | إضافة دورة جديدة
+    Volt::route('courses/create', 'courses.create')->name('courses.create');
+    // Edit a course | تعديل دورة
+    Volt::route('courses/{course}/edit', 'courses.edit')->name('courses.edit');
+    // Show course details | عرض تفاصيل دورة
+    Volt::route('courses/{course}', 'courses.show')->name('courses.show');
+});
+
 require __DIR__.'/auth.php';
