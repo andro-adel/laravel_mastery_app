@@ -1,3 +1,8 @@
+{{--
+Dashboard View
+English: This is the user dashboard page, accessible to authenticated users.
+Arabic: هذه صفحة لوحة تحكم المستخدم، متاحة للمستخدمين المسجلين فقط.
+--}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

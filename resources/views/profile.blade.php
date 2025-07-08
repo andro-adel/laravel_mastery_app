@@ -1,3 +1,8 @@
+{{--
+Profile View
+English: This is the user profile page, where users can update their information, password, or delete their account.
+Arabic: هذه صفحة الملف الشخصي للمستخدم، يمكنه من خلالها تحديث بياناته أو كلمة المرور أو حذف الحساب.
+--}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

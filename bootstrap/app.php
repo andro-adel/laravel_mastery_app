@@ -16,9 +16,25 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
+
+    // Register middleware aliases for roles and permissions
+    // English: Adds 'role' and 'permission' middleware aliases for Spatie Laravel-Permission
+    // Arabic: يضيف أسماء مستعارة للوسيط 'role' و 'permission' الخاصة بحزمة Spatie Laravel-Permission
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            // English: Checks if the user has a specific role | Arabic: يتحقق إذا كان المستخدم لديه دور معين
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class, // English: Role check | Arabic: التحقق من الدور
+            // English: Checks if the user has a specific permission | Arabic: يتحقق إذا كان المستخدم لديه صلاحية معينة
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+        ]);
+
+        // Add to web group
+        // English: Appends 'role' and 'permission' middleware to the web group for easy use in routes
+        // Arabic: يضيف وسيط 'role' و 'permission' إلى مجموعة الويب لاستخدامها بسهولة في المسارات
+        // $middleware->web(append: ['role', 'permission']);
     })
+
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })->create();
+    })
+    ->create();
