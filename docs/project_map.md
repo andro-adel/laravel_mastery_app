@@ -46,3 +46,23 @@ This document describes the main folders and files in this Laravel project and t
 - **storage/**: ملفات مؤقتة، سجلات، ملفات المستخدمين.
 - **tests/**: اختبارات التطبيق.
 - **vendor/**: مكتبات PHP الخارجية.
+
+---
+
+## Code Flow Diagram | مخطط تدفق الكود
+
+```mermaid
+graph TD;
+  A[Route] --> B[Controller]
+  B --> C[Model]
+  B --> D[View (Blade)]
+  C -->|Data| D
+```
+
+**English:**
+- The request starts at the Route, goes to the Controller, which may interact with the Model (database), and finally returns a View to the user.
+
+**بالعربي:**
+- يبدأ الطلب من المسار (Route)، ثم يذهب إلى وحدة التحكم (Controller)، والتي قد تتعامل مع النموذج (Model) لجلب البيانات، وأخيرًا تعرض النتيجة في الواجهة (View).
+
+---
