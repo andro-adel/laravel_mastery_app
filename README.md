@@ -76,7 +76,7 @@ This project is a Laravel-based web application for booking courses. It features
 - User authentication (تسجيل دخول المستخدمين)
 - Role & permission management (إدارة الأدوار والصلاحيات)
 - Admin dashboard (لوحة تحكم المدير)
-- Course management (إدارة الكورسات) – *to be implemented*
+- Course management (إدارة الكورسات) – fully implemented (CRUD, image upload, role-based access)
 - Bilingual documentation (توثيق ثنائي اللغة)
 
 ---
@@ -147,6 +147,7 @@ See [`docs/project_map.md`](docs/project_map.md) for a detailed map.
 - [Project Map | خريطة المشروع](docs/project_map.md)
 - [Step 1: Setup | الخطوة 1: الإعداد](docs/step1_setup.md)
 - [Step 2: Auth & RBAC | الخطوة 2: التوثيق والصلاحيات](docs/step2_auth_rbac.md)
+- [Step 3: Course Management | الخطوة 3: إدارة الكورسات](docs/step3_course_management.md)
 
 ---
 
