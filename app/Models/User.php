@@ -15,11 +15,12 @@ use Illuminate\Notifications\Notifiable;
 
 // Import HasRoles trait for role-based access control
 use Spatie\Permission\Traits\HasRoles;
+use Laravel\Cashier\Billable; // Import Billable trait for Stripe payments
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles; // Add HasRoles trait
+    use HasFactory, Notifiable, HasRoles, Billable; // Add Billable trait
 
     /**
      * The attributes that are mass assignable.
@@ -53,5 +54,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the enrollments for the user.
+     * جلب جميع التسجيلات الخاصة بالمستخدم
+     */
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
     }
 }

@@ -29,4 +29,13 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'instructor_id');
     }
+
+    /**
+     * Get enrollments for this course.
+     * جلب جميع التسجيلات لهذا الكورس
+     */
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }

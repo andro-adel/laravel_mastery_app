@@ -29,3 +29,19 @@
 8. **تعبئة قاعدة البيانات** بالأدوار ومستخدم admin تجريبي.
 
 **الهدف:** توفير نظام مصادقة وصلاحيات مرن وآمن يسهل إدارته وتطويره.
+
+---
+
+## Commands Used | الأوامر المستخدمة
+
+```bash
+composer require laravel/breeze --dev
+php artisan breeze:install livewire
+php artisan migrate
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan migrate
+php artisan db:seed
+```
+
+---
