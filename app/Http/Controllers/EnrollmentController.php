@@ -30,10 +30,19 @@ class EnrollmentController extends Controller
 
         // Example: fixed price for all courses (could be dynamic)
         $amount = 1000; // Amount in cents (e.g., $10.00)
-        $paymentMethod = $request->input('payment_method');
-
-        // Create Stripe Payment Intent (recommended for SCA compliance)
-        $paymentIntent = $user->createOrGetStripeCustomer();
+        // Remove unused $paymentMethod and $paymentIntent
+        // Ensure Stripe customer exists
+        if (!$user->stripe_id) {
+            // Ensure Stripe customer exists (manual fallback if Billable is not working)
+            $stripe = new \Stripe\StripeClient(config('cashier.secret'));
+            $customer = $stripe->customers->create([
+                'email' => $user->email,
+                'name' => $user->name,
+            ]);
+            // Use Eloquent update instead of save() in case $user is not Eloquent model
+            \App\Models\User::where('id', $user->id)->update(['stripe_id' => $customer->id]);
+            $user->stripe_id = $customer->id; // Update in-memory for this request
+        }
         $intent = \Stripe\PaymentIntent::create([
             'amount' => $amount,
             'currency' => 'usd',
@@ -53,7 +62,8 @@ class EnrollmentController extends Controller
                 'payment_status' => 'paid',
                 'stripe_payment_id' => $intent->id,
             ]);
-            $user->notify(new EnrollmentPaid($enrollment)); // Notify user
+            // Send notification using Notification facade
+            \Illuminate\Support\Facades\Notification::send($user, new EnrollmentPaid($enrollment));
             return response()->json([
                 'client_secret' => $intent->client_secret,
                 'enrollment_id' => $enrollment->id,
@@ -66,7 +76,7 @@ class EnrollmentController extends Controller
                 'course_id' => $course->id,
                 'payment_status' => 'failed',
             ]);
-            $user->notify(new EnrollmentFailed($enrollment, $e->getMessage())); // Notify user
+            \Illuminate\Support\Facades\Notification::send($user, new EnrollmentFailed($enrollment, $e->getMessage()));
             return response()->json([
                 'success' => false,
                 'message' => __('Payment failed: ') . $e->getMessage(),
