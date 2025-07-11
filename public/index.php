@@ -1,10 +1,4 @@
 <?php
-/**
- * Public Index File
- *
- * English: The entry point for all HTTP requests to the application. Handles incoming requests and sends responses.
- * Arabic: نقطة الدخول لجميع طلبات HTTP إلى التطبيق. يتعامل مع الطلبات الواردة ويرسل الاستجابات.
- */
 
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;

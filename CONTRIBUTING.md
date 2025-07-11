@@ -1,39 +1,31 @@
-# Contributing Guide | دليل المساهمة
+# المساهمة في المشروع | Contributing to the Project
 
-**English:**
-Thank you for considering contributing to this project! Please follow these guidelines to help us maintain a clean, organized, and bilingual codebase.
+شكرًا لرغبتك في المساهمة! يرجى اتباع القواعد التالية لضمان جودة الكود والتوثيق:
 
-**بالعربي:**
-شكرًا لرغبتك في المساهمة في هذا المشروع! يرجى اتباع هذه التعليمات للحفاظ على كود منظم وموثق باللغتين.
+Thank you for your interest in contributing! Please follow these guidelines to ensure code and documentation quality:
 
 ---
 
-## How to Contribute | كيف تساهم
-
-**English:**
-1. Fork the repository and create a new branch for your feature or fix.
-2. Write clean, well-documented code (with Arabic/English comments).
-3. Test your changes locally.
-4. Open a Pull Request with a clear description (in both languages if possible).
-5. Wait for review and feedback.
-
-**بالعربي:**
-1. اعمل Fork للمشروع وأنشئ فرع جديد للتعديل أو الإضافة.
-2. اكتب كود نظيف وموثق (تعليقات بالعربي والإنجليزي).
-3. اختبر التعديلات على جهازك.
-4. افتح Pull Request مع شرح واضح (يفضل باللغتين).
-5. انتظر المراجعة والتعليقات.
+## أسلوب الكود | Code Style
+- استخدم PSR-12 في PHP.
+- اتبع Naming Conventions القياسية في Laravel.
+- أضف تعليقات توضيحية (عربي/إنجليزي) في كل كلاس ودالة رئيسية.
 
 ---
 
-## Coding Standards | معايير الكود
-- Use PSR-12 for PHP code style.
-- Write clear, descriptive commit messages (preferably bilingual).
-- Add or update documentation for any new features.
-- Remove any unused code or files.
+## التوثيق | Documentation
+- كل ميزة أو كود جديد يجب أن يكون موثقًا بالعربي والإنجليزي.
+- أضف شرحًا مختصرًا في أعلى كل ملف جديد.
 
 ---
 
-## Need Help? | تحتاج مساعدة؟
-- Open an Issue or contact the project maintainer.
-- افتح Issue أو تواصل مع مدير المشروع لأي استفسار.
+## خطوات المساهمة | Contribution Steps
+1. Fork المشروع.
+2. أنشئ فرعًا جديدًا لكل ميزة أو إصلاح.
+3. أرسل Pull Request مع شرح واضح (عربي/إنجليزي).
+
+---
+
+## التواصل | Communication
+- للنقاش أو الأسئلة، افتح Issue جديد أو تواصل عبر البريد.
+- For discussions or questions, open a new Issue or contact via email.

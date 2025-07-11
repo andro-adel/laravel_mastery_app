@@ -1,94 +1,44 @@
-<?php
-
-use Livewire\Volt\Component;
-use App\Models\Course;
-use Illuminate\Support\Facades\Auth;
-
-new class extends Component {
-    /**
-     * Get the list of courses based on user role.
-     * جلب قائمة الدورات حسب صلاحية المستخدم
-     */
-    public function getCoursesProperty()
-    {
-        $user = Auth::user();
-        if ($user->hasRole('admin')) {
-            // Admin sees all courses | المدير يرى جميع الدورات
-            return Course::latest()->paginate(10);
-        } elseif ($user->hasRole('instructor')) {
-            // Instructor sees only his courses | المدرس يرى دوراته فقط
-            return Course::where('instructor_id', $user->id)->latest()->paginate(10);
-        } else {
-            // Student sees only published courses | الطالب يرى الدورات المنشورة فقط
-            return Course::where('status', 'published')->latest()->paginate(10);
-        }
-    }
-
-    /**
-     * Delete a course by id.
-     * حذف دورة حسب المعرف
-     */
-    public function delete($id)
-    {
-        $course = Course::findOrFail($id);
-        // Authorize deletion | تحقق من الصلاحية
-        $this->authorize('delete', $course);
-        // Delete image if exists | حذف الصورة إذا وجدت
-        if ($course->image_path && \Storage::disk('public')->exists($course->image_path)) {
-            \Storage::disk('public')->delete($course->image_path);
-        }
-        $course->delete();
-        session()->flash('success', __('Course deleted successfully! | تم حذف الدورة بنجاح!'));
-    }
-}; ?>
-
 <div>
-    <!-- Courses List | قائمة الدورات -->
-    <h2 class="text-2xl font-bold mb-4">Courses | الدورات</h2>
-
-    @if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @can('create', App\Models\Course::class)
-    <!-- Add Course Button | زر إضافة دورة -->
-    <a href="{{ route('courses.create') }}" class="btn btn-primary mb-4">Add Course | إضافة دورة</a>
-    @endcan
-
-    <table class="table-auto w-full border">
+    <!-- بحث وترتيب الدورات | Courses search & sort -->
+    <div class="flex items-center mb-4">
+        <input type="text" wire:model.debounce.500ms="search" placeholder="بحث عن دورة... | Search courses..."
+            class="border rounded px-2 py-1 mr-2">
+        <a href="{{ route('courses.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded"
+            @if(!auth()->user()->can('manage courses')) style="display:none" @endif>
+            إضافة دورة | Add Course
+        </a>
+    </div>
+    <table class="min-w-full bg-white border">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Title | العنوان</th>
-                <th>Instructor | المدرس</th>
-                <th>Status | الحالة</th>
-                <th>Actions | الإجراءات</th>
+                <th class="cursor-pointer" wire:click="sortBy('title')">العنوان | Title</th>
+                <th class="cursor-pointer" wire:click="sortBy('instructor_id')">المدرب | Instructor</th>
+                <th class="cursor-pointer" wire:click="sortBy('price')">السعر | Price</th>
+                <th class="cursor-pointer" wire:click="sortBy('status')">الحالة | Status</th>
+                <th>إجراءات | Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($this->courses as $course)
+            @forelse($courses as $course)
             <tr>
-                <td>{{ $course->id }}</td>
-                <td>{{ $course->title }}</td>
+                <td><a href="{{ route('courses.show', $course) }}">{{ $course->title }}</a></td>
                 <td>{{ $course->instructor->name ?? '-' }}</td>
-                <td>{{ ucfirst($course->status) }}</td>
+                <td>{{ $course->price }}</td>
+                <td>{{ __($course->status) }}</td>
                 <td>
-                    <a href="{{ route('courses.show', $course) }}" class="btn btn-info btn-sm">Show | عرض</a>
-                    @can('update', $course)
-                    <a href="{{ route('courses.edit', $course) }}" class="btn btn-warning btn-sm">Edit | تعديل</a>
-                    @endcan
-                    @can('delete', $course)
-                    <button onclick="if(confirm('Are you sure? | هل أنت متأكد؟')) { @this.delete({{ $course->id }}) }"
-                        class="btn btn-danger btn-sm">Delete | حذف</button>
+                    @can('manage courses')
+                    <a href="{{ route('courses.edit', $course) }}" class="text-blue-600">تعديل | Edit</a>
                     @endcan
                 </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="5">لا توجد دورات | No courses found.</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
-
-    <!-- Pagination | ترقيم الصفحات -->
     <div class="mt-4">
-        {{ $this->courses->links() }}
+        {{ $courses->links() }}
     </div>
 </div>

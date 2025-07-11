@@ -1,10 +1,4 @@
 <?php
-/**
- * Application Configuration
- *
- * English: Contains configuration options for the Laravel application, such as name, environment, providers, and aliases.
- * Arabic: يحتوي على خيارات التكوين لتطبيق لارافيل مثل الاسم والبيئة والمزودين والأسماء المستعارة.
- */
 
 return [
 

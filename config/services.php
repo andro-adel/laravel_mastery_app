@@ -1,10 +1,4 @@
 <?php
-/**
- * Services Configuration
- *
- * English: Contains credentials and settings for third-party services used by the Laravel application.
- * Arabic: يحتوي على بيانات الاعتماد والإعدادات للخدمات الخارجية المستخدمة في تطبيق لارافيل.
- */
 
 return [
 
@@ -24,14 +18,14 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
-    'resend' => [
-        'key' => env('RESEND_KEY'),
-    ],
-
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'resend' => [
+        'key' => env('RESEND_KEY'),
     ],
 
     'slack' => [

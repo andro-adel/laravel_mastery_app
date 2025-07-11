@@ -1,26 +1,18 @@
 <?php
-/**
- * User Model
- *
- * English: Represents the user entity in the application. Handles user authentication, relationships, and attributes.
- * Arabic: يمثل كيان المستخدم في التطبيق. يتعامل مع المصادقة والعلاقات والخصائص الخاصة بالمستخدم.
- */
 
 namespace App\Models;
 
-
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-// Import HasRoles trait for role-based access control
+use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
-use Laravel\Cashier\Billable; // Import Billable trait for Stripe payments
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles, Billable; // Add Billable trait
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -57,11 +49,46 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the enrollments for the user.
-     * جلب جميع التسجيلات الخاصة بالمستخدم
+     * Get the user's initials
+     */
+    public function initials(): string
+    {
+        return Str::of($this->name)
+            ->explode(' ')
+            ->take(2)
+            ->map(fn ($word) => Str::substr($word, 0, 1))
+            ->implode('');
+    }
+
+    /**
+     * علاقات المستخدم مع التسجيلات | User's enrollments
      */
     public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
+    }
+
+    /**
+     * علاقات المستخدم مع المدفوعات | User's payments
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    /**
+     * علاقات المستخدم مع الإشعارات | User's notifications
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    /**
+     * الدورات التي يدرسها المستخدم (كمدرب) | Courses taught by the user
+     */
+    public function taughtCourses()
+    {
+        return $this->hasMany(Course::class, 'instructor_id');
     }
 }

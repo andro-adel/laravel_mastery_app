@@ -1,39 +1,13 @@
-<?php
-
-use Livewire\Volt\Component;
-use App\Models\Course;
-
-new class extends Component {
-    public Course $course;
-
-    public function mount(Course $course)
-    {
-        $this->course = $course;
-    }
-}; ?>
-
-<div>
-    <!-- Course Details | تفاصيل الدورة -->
-    <h2 class="text-2xl font-bold mb-4">Course Details | تفاصيل الدورة</h2>
-    <div class="mb-4">
-        <strong>Title | العنوان:</strong> {{ $course->title }}
-    </div>
-    <div class="mb-4">
-        <strong>Description | الوصف:</strong> {{ $course->description }}
-    </div>
-    <div class="mb-4">
-        <strong>Instructor | المدرس:</strong> {{ $course->instructor->name ?? '-' }}
-    </div>
-    <div class="mb-4">
-        <strong>Status | الحالة:</strong> {{ ucfirst($course->status) }}
-    </div>
-    <div class="mb-4">
-        <strong>Image | الصورة:</strong><br>
-        @if ($course->image_path)
-        <img src="{{ asset('storage/' . $course->image_path) }}" alt="Course Image" class="h-32">
-        @else
-        <span>No image | لا توجد صورة</span>
-        @endif
-    </div>
-    <a href="{{ route('courses.index') }}" class="btn btn-secondary">Back | رجوع</a>
+<div class="max-w-lg mx-auto">
+    <h2 class="text-xl font-bold mb-4">تفاصيل الدورة | Course Details</h2>
+    <div class="mb-2"><strong>العنوان | Title:</strong> {{ $course->title }}</div>
+    <div class="mb-2"><strong>الوصف | Description:</strong> {{ $course->description }}</div>
+    <div class="mb-2"><strong>المدرب | Instructor:</strong> {{ $course->instructor->name ?? '-' }}</div>
+    <div class="mb-2"><strong>السعر | Price:</strong> {{ $course->price }}</div>
+    <div class="mb-2"><strong>الحالة | Status:</strong> {{ __($course->status) }}</div>
+    <div class="mb-2"><strong>تاريخ الإنشاء | Created at:</strong> {{ $course->created_at->format('Y-m-d') }}</div>
+    @can('manage courses')
+    <a href="{{ route('courses.edit', $course) }}" class="bg-blue-600 text-white px-4 py-2 rounded">تعديل | Edit</a>
+    @endcan
+    <a href="{{ route('courses.index') }}" class="ml-2 text-gray-600">رجوع | Back</a>
 </div>

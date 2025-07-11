@@ -1,10 +1,4 @@
 <?php
-/**
- * Session Configuration
- *
- * English: Contains session driver and storage settings for the Laravel application.
- * Arabic: يحتوي على إعدادات محرك الجلسات وتخزينها لتطبيق لارافيل.
- */
 
 use Illuminate\Support\Str;
 
@@ -19,8 +13,8 @@ return [
     | incoming requests. Laravel supports a variety of storage options to
     | persist session data. Database storage is a great default choice.
     |
-    | Supported: "file", "cookie", "database", "memcached",
-    |            "redis", "dynamodb", "array"
+    | Supported: "file", "cookie", "database", "apc",
+    |            "memcached", "redis", "dynamodb", "array"
     |
     */
 
@@ -103,7 +97,7 @@ return [
     | define the cache store which should be used to store the session data
     | between requests. This must match one of your defined cache stores.
     |
-    | Affects: "dynamodb", "memcached", "redis"
+    | Affects: "apc", "dynamodb", "memcached", "redis"
     |
     */
 

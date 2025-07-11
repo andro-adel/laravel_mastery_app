@@ -1,10 +1,4 @@
 <?php
-/**
- * Mail Configuration
- *
- * English: Contains mailer and email sending settings for the Laravel application.
- * Arabic: يحتوي على إعدادات المراسلة وإرسال البريد الإلكتروني لتطبيق لارافيل.
- */
 
 return [
 
@@ -91,7 +85,6 @@ return [
                 'smtp',
                 'log',
             ],
-            'retry_after' => 60,
         ],
 
         'roundrobin' => [
@@ -100,7 +93,6 @@ return [
                 'ses',
                 'postmark',
             ],
-            'retry_after' => 60,
         ],
 
     ],

@@ -1,10 +1,4 @@
 <?php
-/**
- * Filesystems Configuration
- *
- * English: Contains filesystem disk and storage settings for the Laravel application.
- * Arabic: يحتوي على إعدادات أقراص وأنظمة تخزين الملفات لتطبيق لارافيل.
- */
 
 return [
 

@@ -1,20 +1,11 @@
 <?php
-/**
- * Course Factory
- *
- * English: Defines the default set of attributes for creating course model instances in tests and seeding.
- * Arabic: يحدد مجموعة الخصائص الافتراضية لإنشاء مثيلات نموذج الدورة في الاختبارات والتعبئة.
- */
 
 namespace Database\Factories;
 
 use App\Models\Course;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
-/**
- * @extends Factory<Course>
- */
 class CourseFactory extends Factory
 {
     protected $model = Course::class;
@@ -24,9 +15,8 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
-            'image_path' => null,
+            'price' => $this->faker->randomFloat(2, 10, 500),
             'instructor_id' => User::factory(),
-            'status' => $this->faker->randomElement(['draft', 'published']),
         ];
     }
 }

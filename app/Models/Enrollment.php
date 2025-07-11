@@ -1,41 +1,50 @@
 <?php
-/**
- * Enrollment Model
- * English: Represents a user's enrollment in a course, including payment status.
- * Arabic: يمثل تسجيل المستخدم في كورس معين مع حالة الدفع.
- */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * نموذج التسجيل | Enrollment Model
+ *
+ * يمثل تسجيل طالب في دورة | Represents a student's enrollment in a course
+ */
 class Enrollment extends Model
 {
     use HasFactory;
 
+    /**
+     * الحقول القابلة للتعبئة | Fillable fields
+     * @var array
+     */
     protected $fillable = [
-        'user_id', // User who enrolled | معرف المستخدم
-        'course_id', // Course enrolled in | معرف الكورس
-        'payment_status', // Payment status | حالة الدفع
-        'stripe_payment_id', // Stripe payment ID | رقم عملية Stripe
+        'user_id', 'course_id', 'status',
     ];
 
     /**
-     * User relationship
-     * علاقة المستخدم
+     * الطالب المسجل | The enrolled student
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Course relationship
-     * علاقة الكورس
+     * الدورة المرتبطة بالتسجيل | The course of this enrollment
      */
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    /**
+     * المدفوعات المرتبطة بالتسجيل | Payments for this enrollment
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 }
