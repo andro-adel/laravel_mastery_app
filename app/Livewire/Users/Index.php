@@ -41,11 +41,11 @@ class Index extends Component
 
     public function delete($id)
     {
-        abort_unless(Gate::allows('manage users'), 403);
         $user = User::findOrFail($id);
+        if (!Gate::allows('manage users')) abort(403);
         $user->delete();
+        session()->flash('success', 'تم حذف المستخدم بنجاح | User deleted successfully');
         $this->confirmingDeleteId = null;
-        session()->flash('success', 'تم حذف المستخدم بنجاح');
     }
 
     public function render()

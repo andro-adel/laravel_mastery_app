@@ -5,8 +5,20 @@
             class="border rounded px-2 py-1" />
         <a href="{{ route('payments.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">إضافة مدفوعات</a>
     </div>
-    @if (session()->has('success'))
-    <div class="bg-green-100 text-green-800 p-2 rounded mb-4">{{ session('success') }}</div>
+    @if($confirmingDeleteId)
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div class="bg-white p-6 rounded shadow-lg max-w-sm w-full">
+            <h3 class="text-lg font-bold mb-4">تأكيد الحذف | Confirm Delete</h3>
+            <p class="mb-4">هل أنت متأكد أنك تريد حذف هذه الدفعة؟ لا يمكن التراجع عن هذا الإجراء.<br>Are you sure you want to delete this payment? This action cannot be undone.</p>
+            <div class="flex justify-end gap-2">
+                <button wire:click="delete({{ $confirmingDeleteId }})" class="bg-red-600 text-white px-4 py-2 rounded">تأكيد الحذف | Confirm</button>
+                <button wire:click="$set('confirmingDeleteId', null)" class="bg-gray-300 px-4 py-2 rounded">إلغاء | Cancel</button>
+            </div>
+        </div>
+    </div>
+    @endif
+    @if (session('success'))
+    <div class="bg-green-100 text-green-800 p-2 rounded mt-4">{{ session('success') }}</div>
     @endif
     <table class="min-w-full bg-white border">
         <thead>
@@ -34,18 +46,10 @@
                 <td>{{ $payment->transaction_id }}</td>
                 <td>{{ $payment->paid_at }}</td>
                 <td>
-                    <a href="{{ route('payments.show', $payment) }}" class="text-blue-600 hover:underline">عرض</a>
-                    <a href="{{ route('payments.edit', $payment) }}" class="text-green-600 hover:underline">تعديل</a>
-                    <a href="#" wire:click.prevent="confirmDelete({{ $payment->id }})"
-                        class="text-red-600 hover:underline">حذف</a>
-                    @if($confirmingDeleteId === $payment->id)
-                    <span class="ml-2 text-sm text-gray-700">هل أنت متأكد؟
-                        <button wire:click.prevent="delete({{ $payment->id }})"
-                            class="bg-red-600 text-white px-2 py-1 rounded ml-1">تأكيد</button>
-                        <button wire:click.prevent="$set('confirmingDeleteId', null)"
-                            class="bg-gray-300 px-2 py-1 rounded">إلغاء</button>
-                    </span>
-                    @endif
+                    @can('manage payments')
+                    <a href="{{ route('payments.edit', $payment) }}" class="text-blue-600">تعديل | Edit</a>
+                    <button wire:click="confirmDelete({{ $payment->id }})" class="text-red-600 ml-2">حذف | Delete</button>
+                    @endcan
                 </td>
             </tr>
             @empty

@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Enrollment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * مكون عرض قائمة التسجيلات | Enrollments List Component
@@ -17,6 +18,7 @@ class Index extends Component
     public $search = '';
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
+    public $confirmingDeleteId = null;
 
     /**
      * تحديث الترتيب | Update sorting
@@ -29,6 +31,19 @@ class Index extends Component
             $this->sortField = $field;
             $this->sortDirection = 'asc';
         }
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->confirmingDeleteId = $id;
+    }
+    public function delete($id)
+    {
+        $enrollment = Enrollment::findOrFail($id);
+        if (!Gate::allows('manage enrollments')) abort(403);
+        $enrollment->delete();
+        session()->flash('success', 'تم حذف التسجيل بنجاح | Enrollment deleted successfully');
+        $this->confirmingDeleteId = null;
     }
 
     /**

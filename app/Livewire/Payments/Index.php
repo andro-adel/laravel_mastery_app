@@ -41,11 +41,11 @@ class Index extends Component
 
     public function delete($id)
     {
-        abort_unless(Gate::allows('manage users'), 403);
         $payment = Payment::findOrFail($id);
+        if (!Gate::allows('manage payments')) abort(403);
         $payment->delete();
+        session()->flash('success', 'تم حذف الدفع بنجاح | Payment deleted successfully');
         $this->confirmingDeleteId = null;
-        session()->flash('success', 'تم حذف المدفوعات بنجاح');
     }
 
     public function render()
